@@ -3,190 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PANDU-GI PRO | Operational Assistant</title>
+    <title>PANDU-GI | Operational Assistant</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0284c7">
+    <link rel="apple-touch-icon" href="icon.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0284c7;
-            --primary-dark: #0369a1;
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --text-main: #0f172a;
-            --text-sub: #64748b;
-            --danger: #ef4444;
-            --success: #22c55e;
-            --border: #e2e8f0;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --primary: #0284c7; --primary-dark: #0369a1; --bg: #f8fafc;
+            --surface: #ffffff; --text-main: #0f172a; --text-sub: #64748b;
+            --danger: #ef4444; --success: #22c55e; --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
-
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            margin: 0;
-        }
-
-        /* --- HEADER FIXED --- */
-        .header {
-            background: var(--surface);
-            padding: 16px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: var(--shadow-sm);
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .app-brand {
-            font-weight: 800;
-            font-size: 18px;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-back {
-            display: none;
-            background: #f1f5f9;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 13px;
-            color: var(--text-sub);
-            cursor: pointer;
-            transition: 0.2s;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; }
+        .header { background: var(--surface); padding: 16px 20px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm); border-bottom: 1px solid var(--border); }
+        .app-brand { font-weight: 800; font-size: 18px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .btn-back { display: none; background: #f1f5f9; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 600; font-size: 13px; color: var(--text-sub); cursor: pointer; transition: 0.2s; }
         .btn-back:hover { background: #e2e8f0; color: var(--text-main); }
-
-        /* --- CONTAINER --- */
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 90vh;
-        }
-
-        /* --- MENU GRID --- */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 10px;
-            animation: fadeUp 0.4s ease;
-        }
-
-        .menu-card {
-            background: var(--surface);
-            border-radius: 20px;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: transform 0.1s, border-color 0.2s;
-        }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; min-height: 90vh; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px; animation: fadeUp 0.4s ease; }
+        .menu-card { background: var(--surface); border-radius: 20px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: var(--shadow-md); border: 1px solid var(--border); cursor: pointer; transition: transform 0.1s, border-color 0.2s; }
         .menu-card:active { transform: scale(0.96); background: #f8fafc; }
         .menu-card:hover { border-color: var(--primary); }
-
-        .menu-icon-box {
-            width: 56px; height: 56px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 15px; font-size: 24px;
-        }
-        .ic-blue { background: #e0f2fe; color: #0284c7; }
-        .ic-green { background: #dcfce7; color: #16a34a; }
-        .ic-orange { background: #ffedd5; color: #ea580c; }
-        .ic-gray { background: #f1f5f9; color: #475569; }
-
+        .menu-icon-box { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; font-size: 24px; }
+        .ic-blue { background: #e0f2fe; color: #0284c7; } .ic-green { background: #dcfce7; color: #16a34a; }
+        .ic-orange { background: #ffedd5; color: #ea580c; } .ic-gray { background: #f1f5f9; color: #475569; }
         .menu-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; color: var(--text-main); }
         .menu-desc { font-size: 11px; color: var(--text-sub); font-weight: 500; }
-
-        /* --- SECTIONS --- */
         .app-section { display: none; animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         .app-section.active { display: block; }
-
-        /* --- CARDS & UI --- */
-        .card {
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            position: relative;
-        }
+        .card { background: var(--surface); border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); position: relative; }
         .card.trip-alarm { border-left: 5px solid var(--danger); }
-        
-        .badge {
-            display: inline-block; padding: 4px 10px; border-radius: 20px;
-            font-size: 11px; font-weight: 700; background: #e0f2fe; color: var(--primary-dark); margin-bottom: 8px;
-        }
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; background: #e0f2fe; color: var(--primary-dark); margin-bottom: 8px; }
         .card-title { font-size: 16px; font-weight: 700; margin: 0 0 8px 0; }
         .card-desc { font-size: 13px; color: var(--text-sub); margin: 0; line-height: 1.5; margin-bottom: 6px; }
         .card-label { font-weight: 600; font-size: 12px; color: var(--text-main); display: block; margin-top: 8px; }
-
-        .btn {
-            border: none; padding: 10px 16px; border-radius: 10px;
-            font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex;
-            align-items: center; justify-content: center; gap: 6px; transition: 0.2s;
-        }
+        .btn { border: none; padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: 0.2s; }
         .btn-full { width: 100%; padding: 14px; font-size: 14px; }
         .btn-primary { background: var(--primary); color: white; }
         .btn-danger { background: #fee2e2; color: var(--danger); }
         .btn-secondary { background: #f1f5f9; color: var(--text-main); }
         .btn-success { background: var(--success); color: white; }
-
-        .delete-btn {
-            position: absolute; top: 15px; right: 15px; background: none; border: none;
-            color: #cbd5e1; cursor: pointer; padding: 5px;
-        }
+        .delete-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #cbd5e1; cursor: pointer; padding: 5px; }
         .delete-btn:hover { color: var(--danger); }
-
-        input[type="text"], input[type="number"], textarea {
-            width: 100%; padding: 12px; border: 1px solid var(--border);
-            border-radius: 8px; font-family: inherit; margin-bottom: 12px; font-size: 14px;
-        }
-        
+        input[type="text"], input[type="number"], textarea { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; margin-bottom: 12px; font-size: 14px; }
         .search-bar-wrapper { position: sticky; top: 73px; z-index: 90; background: var(--bg); padding-bottom: 10px; }
-        .search-bar {
-            width: 100%; padding: 14px 16px; border: 2px solid var(--border);
-            border-radius: 12px; font-size: 15px; background: var(--surface);
-            box-shadow: var(--shadow-sm); transition: border-color 0.2s;
-        }
+        .search-bar { width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 15px; background: var(--surface); box-shadow: var(--shadow-sm); transition: border-color 0.2s; }
         .search-bar:focus { outline: none; border-color: var(--primary); }
-
-        .overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
-            z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px;
-        }
-        .modal {
-            background: white; width: 100%; max-width: 450px; border-radius: 20px;
-            padding: 24px; max-height: 85vh; overflow-y: auto;
-            animation: slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        #loader {
-            position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.8);
-            z-index: 2000; display: none; flex-direction: column; align-items: center; justify-content: center; color: white;
-        }
-        .spinner {
-            width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.3);
-            border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
-        }
+        .overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal { background: white; width: 100%; max-width: 450px; border-radius: 20px; padding: 24px; max-height: 85vh; overflow-y: auto; animation: slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        #loader { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.8); z-index: 2000; display: none; flex-direction: column; align-items: center; justify-content: center; color: white; }
+        .spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
         .empty-state { text-align: center; padding: 40px 20px; color: var(--text-sub); }
-
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideUpModal { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -198,47 +69,35 @@
 <div class="header">
     <div class="app-brand">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-        PANDU-GI PRO
+        PANDU-GI
     </div>
-    <button id="btn-home" class="btn-back" onclick="goHome()">
-        ← Menu Utama
-    </button>
+    <button id="btn-home" class="btn-back" onclick="goHome()">← Menu Utama</button>
 </div>
 
 <div class="container">
-
     <div id="main-menu">
         <div style="margin-bottom: 20px;">
             <h2 style="margin: 0; font-size: 22px;">Halo, Operator 👋</h2>
             <p style="margin: 4px 0 0 0; color: var(--text-sub); font-size: 14px;">Pilih menu operasional hari ini.</p>
         </div>
-
         <div class="menu-grid">
             <div class="menu-card" onclick="openSection('section-alarm')">
-                <div class="menu-icon-box ic-blue">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                </div>
+                <div class="menu-icon-box ic-blue"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
                 <div class="menu-title">Cari Alarm</div>
                 <div class="menu-desc">Database Annunciator</div>
             </div>
             <div class="menu-card" onclick="openSection('section-sop')">
-                <div class="menu-icon-box ic-green">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                </div>
+                <div class="menu-icon-box ic-green"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
                 <div class="menu-title">Dokumen SOP</div>
                 <div class="menu-desc">Manual Book PDF</div>
             </div>
             <div class="menu-card" onclick="openSection('section-contact')">
-                <div class="menu-icon-box ic-orange">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                </div>
+                <div class="menu-icon-box ic-orange"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
                 <div class="menu-title">Kontak</div>
                 <div class="menu-desc">Nomor Darurat</div>
             </div>
             <div class="menu-card" onclick="openSection('section-data')">
-                <div class="menu-icon-box ic-gray">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                </div>
+                <div class="menu-icon-box ic-gray"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
                 <div class="menu-title">Data</div>
                 <div class="menu-desc">Backup & Restore</div>
             </div>
@@ -289,7 +148,6 @@
             <button class="btn btn-danger btn-full" style="margin-top:10px" onclick="clearAllData()">Hapus Semua Data</button>
         </div>
     </div>
-
 </div>
 
 <div id="modal-alarm" class="overlay">
@@ -324,7 +182,18 @@
 <div id="loader"><div class="spinner"></div><div id="loader-text">Memproses data...</div></div>
 
 <script>
-// --- DATABASE LENGKAP ---
+// --- REGISTER SERVICE WORKER (Agar bisa offline) ---
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+      console.log('ServiceWorker registration successful');
+    }, function(err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
+// --- DATA MASTER ---
 const INITIAL_DB = [
     {s:"TRAFO 1", a:"CB Q0 – On Local", m:"Posisi PMT pada posisi Local", p:"Switch R/S pada posisi remote atau local", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
     {s:"TRAFO 1", a:"DS Q1/Q2 On Local", m:"Posisi PMS Rel Posisi Local", p:"Switch R/S pada posisi remote atau local", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},

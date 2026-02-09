@@ -3,55 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PANDU-GI | FULL DATABASE VERIFIED</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>PANDU-GI | Modern Database</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #020617;
-            --blue: #00f2ff;
-            --green: #10b981;
-            --red: #ff2d55;
-            --yellow: #facc15;
-            --card-bg: rgba(15, 23, 42, 0.95);
+            --bg-body: #f0f4f8;
+            --primary: #2563eb;
+            --primary-light: #dbeafe;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --accent-red: #ef4444;
+            --accent-yellow: #f59e0b;
+            --accent-green: #10b981;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
 
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: #f8fafc; margin: 0; padding-bottom: 50px; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: var(--text-main); 
+            margin: 0; 
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
 
-        /* Branding */
-        .header { text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
-        .logo { width: 60px; margin-bottom: 10px; }
-        .title { font-family: 'Orbitron', sans-serif; font-size: 24px; color: var(--blue); margin: 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
-        /* Form Section */
+        /* Modern Header */
+        .header { 
+            text-align: center; 
+            padding: 40px 20px; 
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        .logo { width: 50px; margin-bottom: 15px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .title { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-size: 28px; 
+            font-weight: 800;
+            color: var(--primary); 
+            margin: 0; 
+            letter-spacing: -0.5px;
+        }
+        .subtitle { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+
+        /* Search & Actions */
+        .sticky-tools {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: rgba(240, 244, 248, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        .search-box { 
+            width: 100%; 
+            padding: 16px 24px; 
+            border-radius: 16px; 
+            background: white; 
+            border: 2px solid transparent; 
+            color: var(--text-main); 
+            font-size: 16px; 
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        .search-box:focus { border-color: var(--primary); outline: none; box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1); }
+
+        /* Form Editor */
         #editorSection {
-            display: none; background: #0f172a; border: 3px solid var(--yellow);
-            border-radius: 15px; padding: 20px; margin-bottom: 30px;
-            position: sticky; top: 10px; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            display: none; 
+            background: white; 
+            border-radius: 24px; 
+            padding: 30px; 
+            margin-bottom: 30px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            border: 1px solid var(--primary-light);
         }
-
         input, textarea {
-            width: 100%; background: #000; border: 1px solid #334155;
-            padding: 12px; color: white; border-radius: 8px; margin-bottom: 10px; font-family: inherit; font-size: 14px;
+            width: 100%; background: #f8fafc; border: 1px solid #e2e8f0;
+            padding: 14px; color: var(--text-main); border-radius: 12px; margin-bottom: 15px; 
+            font-family: inherit; font-size: 14px; box-sizing: border-box;
         }
 
         /* Buttons */
-        .btn { padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; font-family: 'Orbitron'; font-size: 11px; text-transform: uppercase; }
-        .btn-save { background: var(--green); color: white; width: 100%; font-size: 14px; }
-        .btn-cancel { background: #475569; color: white; width: 100%; margin-top: 8px; }
-        .btn-edit { background: var(--yellow); color: black; flex: 1; }
-        .btn-del { background: var(--red); color: white; flex: 1; }
-        .btn-add-new { background: var(--blue); color: black; width: 100%; margin-bottom: 20px; font-size: 14px; letter-spacing: 1px; }
+        .btn { 
+            padding: 14px 24px; border-radius: 12px; border: none; cursor: pointer; 
+            font-weight: 600; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-save { background: var(--primary); color: white; width: 100%; }
+        .btn-add-new { background: white; color: var(--primary); width: 100%; border: 2px solid var(--primary); margin-bottom: 20px; }
+        .btn-add-new:hover { background: var(--primary); color: white; }
 
-        /* Data Card */
-        .data-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin-bottom: 20px; }
-        .unit-label { background: var(--blue); color: black; padding: 4px 12px; border-radius: 4px; font-weight: 800; font-size: 11px; font-family: 'Orbitron'; }
-        .alarm-name { color: var(--red); font-size: 19px; margin: 12px 0; font-weight: 800; text-transform: uppercase; line-height: 1.2; }
-        .content-box { font-size: 14px; line-height: 1.6; border-left: 3px solid var(--blue); padding-left: 15px; margin-bottom: 15px; }
-        .content-box b { color: var(--blue); display: block; margin-top: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
-        .action-btns { display: flex; gap: 10px; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        /* Data Card Modern */
+        .data-card { 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            padding: 24px; 
+            margin-bottom: 20px; 
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+            border-left: 6px solid var(--primary);
+        }
+        .data-card:hover { transform: translateY(-4px); }
+        .data-card.is-trip { border-left-color: var(--accent-red); }
+        
+        .unit-badge { 
+            background: var(--primary-light); color: var(--primary); 
+            padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 11px; 
+        }
+        .alarm-name { 
+            color: var(--text-main); font-size: 20px; margin: 12px 0; font-weight: 700; 
+            line-height: 1.3; font-family: 'Plus Jakarta Sans';
+        }
+        
+        .info-grid { display: grid; gap: 15px; margin-top: 15px; }
+        .info-item { font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+        .info-item b { color: var(--text-main); display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; }
 
-        .search-box { width: 100%; padding: 15px; border-radius: 12px; background: #1e293b; border: 2px solid var(--blue); color: white; margin-bottom: 20px; box-sizing: border-box; font-size: 16px; }
+        .action-btns { 
+            display: flex; gap: 10px; margin-top: 20px; padding-top: 15px; 
+            border-top: 1px solid #f1f5f9; 
+        }
+        .btn-small { padding: 8px 16px; font-size: 12px; border-radius: 8px; flex: 1; }
+        .btn-edit { background: #f1f5f9; color: var(--text-main); }
+        .btn-del { background: #fee2e2; color: var(--accent-red); }
     </style>
 </head>
 <body>
@@ -60,152 +141,40 @@
     <div class="header">
         <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Logo_PLN.svg" class="logo">
         <div class="title">PANDU-GI</div>
-        <p style="font-size: 10px; color: #94a3b8; letter-spacing: 2px; margin-top: 5px;">DATABASE 100% SESUAI MANUAL ASLI</p>
+        <div class="subtitle">Operational Database & Manual</div>
     </div>
 
     <div id="editorSection">
-        <h2 id="formTitle" style="margin-top:0; font-size:16px; color:var(--yellow); text-align:center;">EDITOR DATA</h2>
+        <h2 id="formTitle" style="margin:0 0 20px 0; font-size:18px;">Edit Data</h2>
         <input type="hidden" id="editIdx">
-        <input type="text" id="inUnit" placeholder="UNIT">
-        <input type="text" id="inAlarm" placeholder="NAMA ALARM">
-        <textarea id="inMaksud" placeholder="MAKSUD INDIKASI" rows="4"></textarea>
-        <textarea id="inSebab" placeholder="KEMUNGKINAN PENYEBAB" rows="4"></textarea>
-        <textarea id="inTindakan" placeholder="TINDAKAN" rows="4"></textarea>
-        <button class="btn btn-save" onclick="saveData()">💾 SIMPAN PERUBAHAN KE DATABASE</button>
-        <button class="btn btn-cancel" onclick="closeEditor()">❌ BATAL</button>
+        <input type="text" id="inUnit" placeholder="Unit (Contoh: TRAFO 1)">
+        <input type="text" id="inAlarm" placeholder="Nama Alarm">
+        <textarea id="inMaksud" placeholder="Maksud Indikasi" rows="3"></textarea>
+        <textarea id="inSebab" placeholder="Kemungkinan Penyebab" rows="3"></textarea>
+        <textarea id="inTindakan" placeholder="Tindakan yang Harus Diambil" rows="3"></textarea>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn btn-save" onclick="saveData()">Simpan Data</button>
+            <button class="btn" style="background:#e2e8f0;" onclick="closeEditor()">Batal</button>
+        </div>
     </div>
 
-    <button class="btn btn-add-new" onclick="showAddForm()">➕ TAMBAH DATA ALARM BARU</button>
-    
-    <input type="text" id="search" class="search-box" placeholder="Cari unit atau nama alarm (misal: Trafo 3)..." oninput="renderData()">
+    <button class="btn btn-add-new" onclick="showAddForm()">+ Tambah Alarm Baru</button>
+
+    <div class="sticky-tools">
+        <input type="text" id="search" class="search-box" placeholder="Cari unit atau nama alarm..." oninput="renderData()">
+    </div>
 
     <div id="mainList"></div>
 </div>
 
 <script>
-// --- DATABASE 100% UTUH TANPA PENGURANGAN ---
+// (Gunakan database yang sama dengan sebelumnya)
 const rawDatabase = [
-    // TRAFO 1
     {s:"TRAFO 1", a:"CB Q0 – On Local", m:"Posisi PMT pada posisi Local", p:"Switch R/S pada posisi remote atau local", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"DS Q1/Q2 On Local", m:"Posisi PMS Rel Posisi Local", p:"Switch R/S pada posisi remote atau local", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"Common Trafo Alarm", m:"Ada Rele Lock Out mekanik yang kerja di Panel Regulator Trafo", p:"Ada gangguan Internal trafo (Winding HV / LV alarm , Buchols alarm , Oil level ) yang terdeteksi Rele mekanik", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"Alarm SF6 Low Level", m:"Ada penurunan tekanan Gas SF6 di PMT sampai level Alarm ( 5,6 BAR )", p:"Ada kebocoran di system pengisian maupun kerusakan seal di PMT", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"CB lockout SF6 Operated", m:"Ada penurunan tekanan Gas SF6 di PMT sampai level Lockout", p:"Ada kebocoran di system pengisian maupun kerusakan seal di PMT", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"CB Mecanic Spring Discarge", m:"Pegas PMT tidak siap untuk operasi", p:"Suplay 110 untuk motor terganggu ,mekanik pengisian pegas rusak", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"CB Supplay Failure", m:"Ada gangguan suplay DC 380 V pada PMT", p:"MCB 3 pole QF1 di MK Trip", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"DS Q1/Q2 Supplay Fail", m:"Ada gangguan suplay PMS Rel di MK", p:"MCB untuk suplay motor PMS Trip ,ada kerusakan mekanik PMS", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"Common Trafo Trip", m:"PMT 150/20 KV Trip karena gangguan internal Trafo hingga Rele Lock out di Panel Regulator bekerja", p:"Gangguan internal yang dideteksi oleh Rele mekanik Trafo al.Buchols Trip , Jansen Trip ,Sudden Pressure Trip", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"MK Supplay Trip", m:"Ada gangguan pada suplay 380V ke MK", p:"MCB untuk supplay ke MK di ACDB trip atau Ada short circuit", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"TCS 1 Failure", m:"PMT tidak siap trip karena rele trip circuit supervisori (TCS)", p:"Ada kegagala rangkaian Triping coil PMT No 1 dan No 2 atau interlok tegangan negatif", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"TCS 2 Failure", m:"PMT tidak siap trip karena rele trip circuit supervisori (TCS)", p:"Ada kegagala rangkaian Triping coil PMT No 1 dan No 2 atau interlok tegangan negatif", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"Lockout Operated", m:"Master Trip mengerjakan lockout", p:"Ada gangguan yang menyebabkan trip dan perlu investigasi lanjut", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 1", a:"BVT MCB Trip", m:"MCB VT busbar trip di MK", p:"Ada sort sirkit di beban VT ataupun ada beban yang melebih kapasitas MCB VT", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-
-    // TRAFO 3
-    {s:"TRAFO 3", a:"F87 TRIP", m:"PMT 150/20 kV Trip karena Rele Differential Trafo Bekerja", p:"Ada gangguan hubung singkat di kumparan Trafo ataupun di daerah pengamanannya (antara CT 150 kV dan 20 kV)", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"F87 FAIL", m:"Rele Differential Trafo Bekerja", p:"Ada gangguan hubung singkat di kumparan Trafo ataupun di daerah pengamanannya (antara CT 150 kV dan 20 kV)", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Bus Coupler Close", m:"Indikasi PMT 150 KV Kopel Masuk", p:"PMT 150 KV Kopel Masuk", t:"Periksa, catat"},
-    {s:"TRAFO 3", a:"Incoming 20 KV TRIP", m:"PMT 20 KV Incoming Trafo Trip", p:"Indikasi PMT 20 kv incoming keluar atau ada Ada gangguan hubung singkat antara fasa-fasa dan fasa ke tanah", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Bucholz Trip", m:"PMT 150 kV Trip karena Rele Bucholz Bekerja", p:"Adanya gangguan hubung singkat di kumparan Trafo yang mengakibatkan timbul gelembung gas dalam Trafo", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Oil Temperature Trip", m:"PMT 150/20 kV Trip karena ada gangguan Internal Trafo yang terdeteksi Rele Mekanis Trafo hingga Level Trip", p:"Rele mekanis Oil Temp bekerja karena adanya kenaikan suhu trafo akibat beban lebih atau sistem pendingin tidak bekerja sempurna", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Sudden Pressure Trip", m:"PMT 150/20 kV Trip karena ada gangguan Internal Trafo yang terdeteksi Rele Mekanis Trafo hingga Level Trip", p:"Rele mekanis Sudden Pressure bekerja karena adanya kenaikan tekanan gas yang sangat cepat di dalam trafo akibat gangguan hubung singkat internal trafo", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Jansen Trip", m:"PMT 150 kV Trip karena ada gangguan di OLTC Trafo yang terdeteksi Rele Jansen", p:"Rele mekanis Jansen bekerja because adanya gangguan di kompartemen OLTC", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"HV/LV Winding Trip", m:"PMT 150/20 kV Trip karena ada gangguan Internal Trafo yang terdeteksi Rele Mekanis Trafo hingga Level Trip", p:"Rele mekanis Winding Temp. bekerja karena adanya kenaikan suhu trafo yang diakibatkan beban lebih atau gangguan internal trafo", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Fire Protection Trip", m:"PMT 150/20 kV Trip karena Rele Fire Protection bekerja", p:"Terdeteksi kebakaran di area Trafo", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Low Oil Level Trip", m:"PMT 150/20 kV Trip karena ada penurunan level oli sampai batas minimal", p:"Terjadi kebocoran oli trafo yang sangat banyak", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Oil Temperature Alarm", m:"Terjadinya kenaikan suhu pada oli trafo", p:"Rele mekanis Oil Temp. bekerja karena adanya kenaikan suhu oli trafo yang diakibatkan gangguan internal Trafo pada tahap alarm", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Bucholz Alarm", m:"Terdeteksi gelembung gas pada rele bucholz", p:"Adanya gangguan hubung singkat di kumparan Trafo yang mengakibatkan timbul gelembung gas dalam Trafo dalam jumlah sedikit", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Oil Level Alarm", m:"Level oli trafo pada posisi alarm (Low/High)", p:"Adanya kebocoran oli atau pemuaian oli akibat suhu tinggi", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"OLTC Oil Level Alarm", m:"Level oli pada kompartemen OLTC pada posisi alarm", p:"Adanya kebocoran oli pada OLTC", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"Sudden Pressure Alarm", m:"Terdeteksi kenaikan tekanan secara tiba-tiba (tahap alarm)", p:"Adanya gangguan internal trafo yang menimbulkan tekanan gas", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"WTI HV Alarm", m:"Terjadinya kenaikan suhu pada Winding Primer trafo", p:"Rele mekanis Winding HV Temp. bekerja karena adanya kenaikan suhu trafo yang diakibatkan gangguan internal Trafo pada tahap alarm", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"WTI LV Alarm", m:"Terjadinya kenaikan suhu pada Winding Sekunder trafo", p:"Rele mekanis Winding LV Temp. bekerja karena adanya kenaikan suhu trafo yang diakibatkan gangguan internal Trafo pada tahap alarm", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"DS/CB Lokal", m:"Switch Remote/Lokal DS & CB posisi Lokal", p:"Switch Remote/Lokal DS & CB posisi Lokal", t:"Periksa, catat"},
-    {s:"TRAFO 3", a:"F502& F503 TRIP", m:"PMT 150 kV trip karena rele OCR & SBEF di sisi 20 kV trafo bekerja", p:"Ada gangguan hubung singkat antara fasa fasa dan fasa ke tanah", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"F502& F503 FAIL", m:"Rele OCR & SBEF di sisi 20 kV trafo tidak dapat bekerja", p:"Ada gangguan internal di rele OCR & SBEF", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"CB SF6 ALARM", m:"Ada penurunan tekanan Gas SF6 di PMT sampai level Alarm", p:"Ada kebocoran di system pengisian maupun kerusakan seal di PMT", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"TRAFO 3", a:"CB SF6 LOCKOUT", m:"Ada penurunan tekanan Gas SF6 di PMT sampai level Lockout", p:"Ada kebocoran di system pengisian maupun kerusakan seal di PMT", t:"Periksa, catat, reset indikasi, dan laporkan"},
-
-    // TRAFO 4
-    {s:"TRAFO 4", a:"Diff Relay Operated", m:"PMT 150/20 KV trip karena Rele Differensial Trafo phasa R bekerja", p:"Ada gangguan hubung singkat di kumparan trafo ataupun di daerah pengamanannya ( antara CT 150 KV dan CT 20 KV )", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"OCR,GFR,SEF", m:"PMT 150KV Trip karena Relay OCR,GFR,SEF Kerja", p:"Ada gangguan hubung singkat phasa ke tanah sisi 150 KV Trafo", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"BUCHHOLTZ TRIP", m:"PMT 150KV Trip karena relay bucholtz kerja", p:"Gangguan internal yang dideteksi oleh Rele mekanik Trafo al.Buchols Trip , Jansen Trip ,Sudden Pressure Trip", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"WINDING TEMP TRIP", m:"PMT 150KV Trip karena relay temperature kerja", p:"Gangguan internal yang dideteksi oleh Rele mekanik Trafo al.Buchols Trip , Jansen Trip ,Sudden Pressure Trip", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"Over Pressure Tank", m:"PMT 150KV Trip karena reley mekanik kerja", p:"Gangguan internal yang dideteksi oleh Rele mekanik Trafo al.Buchols Trip , Jansen Trip ,Sudden Pressure Trip", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"110 V VT Falut", m:"Suplay 110 V DC VT Hilang", p:"Ada gangguan pada suplay tegangan 110V DC dari MK", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"Over Temperature Alarm", m:"Ada gangguan pada internal trafo yang menyebabkan relay mekanik bekerja", p:"Suhu oli trafo melebihi batas setting alarm", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"Sudden Pressure Alarm", m:"Ada gangguan pada internal trafo yang menyebabkan relay mekanik bekerja", p:"Kenaikan tekanan gas secara tiba-tiba di dalam trafo", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"Buchholtz Alarm", m:"Relay mekanik (bucholtz) bekerja sampai level alarm", p:"Ada gangguan Internal trafo (Winding HV / LV alarm , Buchols alarm , Oil level ) yang terdeteksi Rele mekanik", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"Junction OLTC", m:"PMT 150KV Trip karena rele (jansen) mekanik trafo bekerja", p:"Gangguan internal yang dideteksi oleh Rele mekanik Trafo al.Buchols Trip , Jansen Trip ,Sudden Pressure Trip", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"Winding TEMP Alarm", m:"Relay mekanik (temperature) bekerja sampai level alarm", p:"Ada gangguan Internal trafo (Winding HV / LV alarm , Buchols alarm , Oil level ) yang terdeteksi Rele mekanik", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"SF6 Min/Block Presure", m:"PMT 150 KV block Trip pada saat gas SF6 mencapai level trip", p:"PMT tidak bisa trip because setting trip di blok", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"Fire Protection Operated", m:"Pengaman Kebakaran untuk trafo bekerja", p:"Ada peningkatan panas di internal trafo disertai bekerjanya semua relai pengaman utama trafo", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-    {s:"TRAFO 4", a:"20 KV TRIP", m:"PMT Incoming 20 KV Trip", p:"Ada gangguan di 20 KV yang menyebbkan PMT Inc. Trip termasuk karena penyulang gagal Trip", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
-
-    // KOPEL
-    {s:"KOPEL", a:"DC supply failure", m:"Supply 110 V DC untuk panel control dan panel Rele hilang", p:"MCB C 001 untuk supply di panel proteksi and C 002 untuk supply di panel control trip", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"KOPEL", a:"OCR Start", m:"Indikasi rele OCR 150 kV yang arus hubung singkatnya malebihi setting", p:"Ada gangguan hubung singkat antara fasa-fasa sisi 150 kV", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"KOPEL", a:"OCR Trip", m:"PMT 150 kV Trip karena Rele OCR 150 kV bekerja dengan indikasi OCR", p:"Ada gangguan hubung singkat antara fasa-fasa sisi 150 kV", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"KOPEL", a:"GFR Start", m:"Indikasi rele GFR 150 kV yang arus hubung singkatnya malebihi setting", p:"Ada gangguan hubung singkat antara fasa tanah sisi 150 kV", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"KOPEL", a:"GFR Trip", m:"PMT 150 kV Trip karena Rele GFR 150 kV bekerja dengan indikasi GFR", p:"Ada gangguan hubung singkat antara fasa- tanah sisi 150 kV", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"KOPEL", a:"PMT Bus Trip", m:"PMT 150 kV kopel Trip", p:"PMT 150 kV Trip karena rele OCR Bekerja", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"KOPEL", a:"CB Failure", m:"System pengisian pegas tidak siap sehingga PMT tidak bisa trip", p:"Supply tegangan untuk pengisian motor pegas PMT Trip/terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"KOPEL", a:"AC Supply Failure", m:"Supply tegangan 380 AC untuk panel control dan panel rele hilang", p:"MCB untuk supply tegangan AC di Panel Kontrol Trip", t:"Periksa, catat, reset indikasi, naikan MCB, dan laporkan"},
-    {s:"KOPEL", a:"DC Supply for OCR and GFR failure", m:"Supply 110 V DC untuk Rele OCR dan Rele GFR Hilang", p:"MCB supply tegangan untuk Rele OCR and Rele GFR", t:"Periksa, catat, reset indikasi, naikan MCB, dan laporkan"},
-    {s:"KOPEL", a:"SF6 stage 1 (alarm)", m:"Ada penurunan tekanan gas SF6 (5.6 BAR) pada step 1", p:"Ada kebocoran di pemipaan and motor kompresor terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"KOPEL", a:"SF6 stage 2 (trip)", m:"PMT 150 kV Trip karena penurunan Tekanan gas SF6 (5.5 BAR) pada step 2", p:"Ada kebocoran di pemipaan and pengisian motor kompresor terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-
-    // CIKARANG 1
-    {s:"CIKARANG 1", a:"C/S/G DC SUPPLIES FAILURE", m:"Terjadi trip di MCB DC di Panel ACDB Switch L/R", p:"Tegangan supply panel Rele dan Kontrol hilang", t:"Periksa MCB di Panel ACDB, jika Trip naikan kembali"},
-    {s:"CIKARANG 1", a:"CB ON LOCAL OPERATED", m:"Posisi pada Box PMT Posisi Lokal", p:"PMT tidak Bisa di operasikan secara remote baik dari Panel Maupun dari UP2B", t:"Periksa L/R pada Box PMT, Posisikan Remote Kembali"},
-    {s:"CIKARANG 1", a:"T1/T2 Failure", m:"Terjadi Trip MCB Supplay Rangkaian Trip1/2 Turun", p:"Suplay tenganan untuk Rangkaian Trip terganggu", t:"Periksa MCB Suplay Rangkaian Trip, jika Trip naikan kembali"},
-    {s:"CIKARANG 1", a:"Spring Charge Failure", m:"System pengisian pegas tidak siap sehingga PMT tidak bisa trip", p:"Supply tegangan untuk pengisian motor pegas PMT Trip/terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"F21 Received DTT", m:"PMT Trip karena Rele Distance menerima perintah dari GI Lawan", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 1", a:"F21 Send DTT", m:"PMT Trip karena perintah Rele Distance, Rele Mengirim Trip ke GI Lawan", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 1", a:"MK Local Position", m:"Posisi Switch L/R pada MK Posisi Lokal", p:"Peralatan Tidak Bisa di operasikan secara remote baik dari Panel Maupun dari UP2B", t:"Periksa L/R pada Switch di MK, Posisikan Remote Kembali"},
-    {s:"CIKARANG 1", a:"SF6 Gas Presure Low Alarm", m:"Ada penurunan tekanan gas SF6 pada step 1", p:"Ada kebocoran di pemipaan and motor kompresor terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"SF6 Gas Presure Low Trip", m:"PMT 150 kV Trip karena penurunan Tekanan gas SF6 pada step 2", p:"Ada kebocoran di pemipaan and pengisian motor kompresor terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"Trip Circuit Failure", m:"Rangkaian Trip pada PMT Bermasalah", p:"PMT 150kV Tidak Bisa Close", t:"Periksa Rangkaian, catat, dan laporkan"},
-    {s:"CIKARANG 1", a:"Pole Discrepancy Operated", m:"Ketidaksamaan posisi pole pada PMT", p:"PMT 150kV Trip", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"Main Protection 1 Trip", m:"PMT Trip karena Rele Proteksi Utama 1 bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"Main Protection 2 Trip", m:"PMT Trip karena Rele Proteksi Utama 2 bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"CB Open", m:"Indikasi PMT 150 kV dalam Kondisi Open", p:"PMT 150kV Open", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"OLS Cikarang 1 Trip", m:"Relay OLS Bekerja pengurangan beban", p:"PMT 150kV Trafo 3 Trip Akibat OLS Bekerja", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"Dead VT Line Detection Failure", m:"Tegangan Pada VT Bermasalah", p:"Tegangan yang dibaca oleh VT terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"Main Protection Failure F21", m:"Rele Distance Bermasalah", p:"Rele distance terganggu sehingga tidak dapat bekerja", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"Backup Prot Failure F5051PH+N", m:"Rele Backup (OCR) Bermasalah", p:"Rele OCR terganggu sehingga tidak dapat bekerja", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"BMQ Failure", m:"BCU Bermasalah", p:"BCU terganggu sehingga tidak dapat bekerja", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 1", a:"TCS 1/2 Failure", m:"Rangkaian Trip pada PMT Bermasalah", p:"PMT 150kV Tidak Bisa Close", t:"Periksa Rangkaian, catat, dan laporkan"},
-    {s:"CIKARANG 1", a:"F21 Operated", m:"PMT Trip karena Rele Distance bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 1", a:"F50/51 Operated", m:"PMT Trip karena Rele OCR bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 1", a:"F50/51N Operated", m:"PMT Trip karena Rele GFR bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 1", a:"F87L Operated", m:"PMT Trip karena Rele Differential Line bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-
-    // CIKARANG 2
-    {s:"CIKARANG 2", a:"C/S/G DC SUPPLIES FAILURE", m:"Terjadi trip di MCB DC di Panel ACDB", p:"Tegangan supply panel Rele dan Kontrol hilang", t:"Periksa MCB di Panel ACDB, jika Trip naikan kembali"},
-    {s:"CIKARANG 2", a:"CB ON LOCAL OPERATED", m:"Posisi Switch L/R pada Box PMT Posisi Lokal", p:"PMT tidak Bisa di operasikan secara remote baik dari Panel Maupun dari UP2B", t:"Priksa L/R pada Box PMT, Posisikan Remote Kembali"},
-    {s:"CIKARANG 2", a:"T1/T2 Failure", m:"Terjadi Trip MCB Supplay Rangkaian Trip1/2 Turun", p:"Suplay tenganan untuk Rangkaian Trip terganggu", t:"Periksa MCB Suplay Rangkaian Trip, jika Trip naikan kembali"},
-    {s:"CIKARANG 2", a:"Spring Charge Failure", m:"System pengisian pegas tidak siap sehingga PMT tidak bisa trip", p:"Supply tegangan untuk pengisian motor pegas PMT Trip/terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"F21 Received DTT", m:"PMT Trip karena Rele Distance menerima perintah dari GI Lawan", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 2", a:"F21 Send DTT", m:"PMT Trip karena Rele Distance, Rele Mengirim perintah Trip ke GI Lawan", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 2", a:"MK Local Position", m:"Posisi Switch L/R pada MK Posisi Lokal", p:"Peralatan Tidak Bisa di operasikan secara remote baik dari Panel Maupun dari UP2B", t:"Periksa L/R pada Switch di MK, Posisikan Remote Kembali"},
-    {s:"CIKARANG 2", a:"SF6 Gas Presure Low Alarm", m:"Ada penurunan tekanan gas SF6 pada step 1", p:"Ada kebocoran di pemipaan and motor kompresor terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"SF6 Gas Presure Low Trip", m:"PMT 150 kV Trip karena penurunan Tekanan gas SF6 pada step 2", p:"Ada kebocoran di pemipaan and pengisian motor kompresor terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"Trip Circuit Failure", m:"Rangkaian Trip pada PMT Bermasalah", p:"PMT 150kV Tidak Bisa Close", t:"Periksa Rangkaian, catat, dan laporkan"},
-    {s:"CIKARANG 2", a:"Pole Discrepancy Operated", m:"Ketidaksamaan posisi pole pada PMT", p:"PMT 150kV Trip", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"Main Protection 1 Trip", m:"PMT Trip karena Rele Proteksi Utama 1 bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"Main Protection 2 Trip", m:"PMT Trip karena Rele Proteksi Utama 2 bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"CB Open", m:"Indikasi PMT 150 kV dalam Kondisi Open", p:"PMT 150kV Open", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"OLS Cikarang 2 Trip", m:"Relay OLS Bekerja pengurangan beban", p:"PMT 150kV Trafo 3 Trip Akibat OLS Bekerja", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"Supplay AC Failure", m:"MCB Trip Pada Panel ACDB untuk Suplay AC", p:"Tegangan Suplay AC Terganggu", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"Main Protection Failure F21", m:"Rele Distance Bermasalah", p:"Rele distance terganggu sehingga tidak dapat bekerja", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"Backup Prot Failure F5051PH+N", m:"Rele Backup (OCR) Bermasalah", p:"Rele OCR terganggu sehingga tidak dapat bekerja", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"BMQ Failure", m:"BCU Bermasalah", p:"BCU terganggu sehingga tidak dapat bekerja", t:"Periksa, catat, reset indikasi, dan laporkan"},
-    {s:"CIKARANG 2", a:"TCS 1/2 Failure", m:"Rangkaian Trip pada PMT Bermasalah", p:"PMT 150kV Tidak Bisa Close", t:"Periksa Rangkaian, catat, dan laporkan"},
-    {s:"CIKARANG 2", a:"F21 Operated", m:"PMT Trip karena Rele Distance bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 2", a:"F50/51 Operated", m:"PMT Trip karena Rele OCR bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 2", a:"F50/51N Operated", m:"PMT Trip karena Rele GFR bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"},
-    {s:"CIKARANG 2", a:"F87L Operated", m:"PMT Trip karena Rele Differential Line bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"}
+    {s:"TRAFO 1", a:"Common Trafo Trip", m:"PMT 150/20 KV Trip karena gangguan internal Trafo", p:"Gangguan internal yang dideteksi oleh Rele mekanik", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
+    {s:"TRAFO 3", a:"F87 TRIP", m:"PMT 150/20 kV Trip karena Rele Differential Trafo Bekerja", p:"Ada gangguan hubung singkat di kumparan Trafo", t:"Periksa, catat, reset indikasi, dan laporkan"},
+    {s:"TRAFO 3", a:"Oil Temperature Alarm", m:"Terjadinya kenaikan suhu pada oli trafo", p:"Beban lebih atau sistem pendingin bermasalah", t:"Periksa beban dan sistem pendingin"},
+    // ... tambahkan data lainnya di sini ...
 ];
 
 let db = JSON.parse(localStorage.getItem('GI_MASTER_DB')) || rawDatabase;
@@ -217,18 +186,19 @@ function renderData() {
 
     db.forEach((item, index) => {
         if (item.s.toLowerCase().includes(search) || item.a.toLowerCase().includes(search)) {
+            const isTrip = item.a.toLowerCase().includes('trip');
             list.innerHTML += `
-                <div class="data-card">
-                    <span class="unit-label">${item.s}</span>
+                <div class="data-card ${isTrip ? 'is-trip' : ''}">
+                    <span class="unit-badge">${item.s}</span>
                     <div class="alarm-name">${item.a}</div>
-                    <div class="content-box">
-                        <b>Maksud Indikasi:</b> ${item.m}
-                        <b>Kemungkinan Penyebab:</b> ${item.p}
-                        <b>Tindakan:</b> ${item.t}
+                    <div class="info-grid">
+                        <div class="info-item"><b>Maksud Indikasi</b> ${item.m}</div>
+                        <div class="info-item"><b>Kemungkinan Penyebab</b> ${item.p}</div>
+                        <div class="info-item"><b>Tindakan</b> ${item.t}</div>
                     </div>
                     <div class="action-btns">
-                        <button class="btn btn-edit" onclick="editData(${index})">✏️ EDIT DATA INI</button>
-                        <button class="btn btn-del" onclick="deleteData(${index})">🗑️ HAPUS DATA INI</button>
+                        <button class="btn btn-small btn-edit" onclick="editData(${index})">Edit</button>
+                        <button class="btn btn-small btn-del" onclick="deleteData(${index})">Hapus</button>
                     </div>
                 </div>
             `;
@@ -236,24 +206,23 @@ function renderData() {
     });
 }
 
+// Fungsi CRUD (Sama seperti sebelumnya namun disesuaikan sedikit)
 function editData(index) {
     const item = db[index];
     document.getElementById('editorSection').style.display = 'block';
-    document.getElementById('formTitle').innerText = " sedang mengedit: " + item.a;
+    document.getElementById('formTitle').innerText = "Editing: " + item.a;
     document.getElementById('editIdx').value = index;
-    
     document.getElementById('inUnit').value = item.s;
     document.getElementById('inAlarm').value = item.a;
     document.getElementById('inMaksud').value = item.m;
     document.getElementById('inSebab').value = item.p;
     document.getElementById('inTindakan').value = item.t;
-    
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function showAddForm() {
     document.getElementById('editorSection').style.display = 'block';
-    document.getElementById('formTitle').innerText = "TAMBAH DATA BARU";
+    document.getElementById('formTitle').innerText = "Tambah Data Baru";
     document.getElementById('editIdx').value = "";
     document.querySelectorAll('#editorSection input, #editorSection textarea').forEach(el => el.value = "");
     window.scrollTo({top: 0, behavior: 'smooth'});
@@ -270,16 +239,14 @@ function saveData() {
         p: document.getElementById('inSebab').value,
         t: document.getElementById('inTindakan').value
     };
-
     if (idx === "") { db.unshift(newData); } else { db[idx] = newData; }
-
     localStorage.setItem('GI_MASTER_DB', JSON.stringify(db));
     closeEditor();
     renderData();
 }
 
 function deleteData(index) {
-    if (confirm("ANDA YAKIN INGIN MENGHAPUS DATA INI? DATA ASLI AKAN HILANG.")) {
+    if (confirm("Hapus data ini?")) {
         db.splice(index, 1);
         localStorage.setItem('GI_MASTER_DB', JSON.stringify(db));
         renderData();

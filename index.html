@@ -16,7 +16,8 @@
             --danger: #ef4444;
             --success: #22c55e;
             --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -26,254 +27,259 @@
             background-color: var(--bg);
             color: var(--text-main);
             margin: 0;
-            padding-bottom: 90px; /* Space for bottom nav */
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER FIXED --- */
         .header {
             background: var(--surface);
-            padding: 20px 20px 15px;
+            padding: 16px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        .app-title {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--primary);
-            margin: 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            justify-content: space-between;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--border);
         }
-        .app-subtitle {
-            font-size: 12px;
-            color: var(--text-sub);
+        
+        .app-brand {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-back {
+            display: none;
+            background: #f1f5f9;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
             font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-top: 4px;
+            font-size: 13px;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: 0.2s;
         }
+        .btn-back:hover { background: #e2e8f0; color: var(--text-main); }
 
         /* --- CONTAINER --- */
         .container {
             max-width: 600px;
             margin: 0 auto;
-            padding: 15px;
+            padding: 20px;
+            min-height: 90vh;
         }
 
-        /* --- TABS --- */
-        .tab-section { display: none; animation: fadeIn 0.3s ease; }
-        .tab-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- MENU GRID --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 10px;
+            animation: fadeUp 0.4s ease;
+        }
 
-        /* --- CARDS --- */
+        .menu-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: transform 0.1s, border-color 0.2s;
+        }
+        .menu-card:active { transform: scale(0.96); background: #f8fafc; }
+        .menu-card:hover { border-color: var(--primary); }
+
+        .menu-icon-box {
+            width: 56px; height: 56px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 15px; font-size: 24px;
+        }
+        .ic-blue { background: #e0f2fe; color: #0284c7; }
+        .ic-green { background: #dcfce7; color: #16a34a; }
+        .ic-orange { background: #ffedd5; color: #ea580c; }
+        .ic-gray { background: #f1f5f9; color: #475569; }
+
+        .menu-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; color: var(--text-main); }
+        .menu-desc { font-size: 11px; color: var(--text-sub); font-weight: 500; }
+
+        /* --- SECTIONS --- */
+        .app-section { display: none; animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .app-section.active { display: block; }
+
+        /* --- CARDS & UI --- */
         .card {
             background: var(--surface);
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 12px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            transition: transform 0.2s;
-        }
-        .card:active { transform: scale(0.98); }
-        
-        .card.trip-alarm {
-            border-left: 5px solid var(--danger);
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            background: #e0f2fe;
-            color: var(--primary-dark);
-            margin-bottom: 8px;
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin: 0 0 8px 0;
-            line-height: 1.4;
-        }
-
-        .card-desc {
-            font-size: 13px;
-            color: var(--text-sub);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .action-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            padding-top: 12px;
-            border-top: 1px solid #f1f5f9;
-        }
-
-        /* --- INPUTS --- */
-        .search-bar {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid var(--border);
             border-radius: 12px;
-            font-size: 15px;
-            font-family: inherit;
-            background: var(--surface);
-            margin-bottom: 15px;
-            transition: border-color 0.2s;
-        }
-        .search-bar:focus { outline: none; border-color: var(--primary); }
-
-        input[type="text"], input[type="number"], textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-family: inherit;
+            padding: 16px;
             margin-bottom: 12px;
-            font-size: 14px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            position: relative;
         }
+        .card.trip-alarm { border-left: 5px solid var(--danger); }
+        
+        .badge {
+            display: inline-block; padding: 4px 10px; border-radius: 20px;
+            font-size: 11px; font-weight: 700; background: #e0f2fe; color: var(--primary-dark); margin-bottom: 8px;
+        }
+        .card-title { font-size: 16px; font-weight: 700; margin: 0 0 8px 0; }
+        .card-desc { font-size: 13px; color: var(--text-sub); margin: 0; line-height: 1.5; margin-bottom: 6px; }
+        .card-label { font-weight: 600; font-size: 12px; color: var(--text-main); display: block; margin-top: 8px; }
 
-        /* --- BUTTONS --- */
         .btn {
-            border: none;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            border: none; padding: 10px 16px; border-radius: 10px;
+            font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex;
+            align-items: center; justify-content: center; gap: 6px; transition: 0.2s;
         }
-        .btn-full { width: 100%; padding: 14px; font-size: 15px; }
+        .btn-full { width: 100%; padding: 14px; font-size: 14px; }
         .btn-primary { background: var(--primary); color: white; }
         .btn-danger { background: #fee2e2; color: var(--danger); }
         .btn-secondary { background: #f1f5f9; color: var(--text-main); }
         .btn-success { background: var(--success); color: white; }
 
-        /* --- BOTTOM NAV --- */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0;
-            padding-bottom: max(8px, env(safe-area-inset-bottom));
-            z-index: 500;
+        .delete-btn {
+            position: absolute; top: 15px; right: 15px; background: none; border: none;
+            color: #cbd5e1; cursor: pointer; padding: 5px;
         }
-        .nav-item {
-            border: none;
-            background: none;
-            color: var(--text-sub);
-            font-size: 10px;
-            font-weight: 600;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            padding: 8px;
-            cursor: pointer;
-            width: 25%;
-        }
-        .nav-item svg { width: 24px; height: 24px; stroke-width: 2; }
-        .nav-item.active { color: var(--primary); }
-        .nav-item.active svg { stroke: var(--primary); }
+        .delete-btn:hover { color: var(--danger); }
 
-        /* --- MODAL --- */
+        input[type="text"], input[type="number"], textarea {
+            width: 100%; padding: 12px; border: 1px solid var(--border);
+            border-radius: 8px; font-family: inherit; margin-bottom: 12px; font-size: 14px;
+        }
+        
+        .search-bar-wrapper { position: sticky; top: 73px; z-index: 90; background: var(--bg); padding-bottom: 10px; }
+        .search-bar {
+            width: 100%; padding: 14px 16px; border: 2px solid var(--border);
+            border-radius: 12px; font-size: 15px; background: var(--surface);
+            box-shadow: var(--shadow-sm); transition: border-color 0.2s;
+        }
+        .search-bar:focus { outline: none; border-color: var(--primary); }
+
         .overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(2px);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
+            z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px;
         }
         .modal {
-            background: white;
-            width: 100%;
-            max-width: 450px;
-            border-radius: 20px;
-            padding: 24px;
-            max-height: 85vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: white; width: 100%; max-width: 450px; border-radius: 20px;
+            padding: 24px; max-height: 85vh; overflow-y: auto;
+            animation: slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* --- LOADING --- */
         #loader {
-            position: fixed; top:0; left:0; right:0; bottom:0;
-            background: rgba(0,0,0,0.8); z-index: 2000;
-            display: none; flex-direction: column;
-            align-items: center; justify-content: center; color: white;
+            position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.8);
+            z-index: 2000; display: none; flex-direction: column; align-items: center; justify-content: center; color: white;
         }
         .spinner {
             width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.3);
-            border-top-color: white; border-radius: 50%;
-            animation: spin 1s linear infinite; margin-bottom: 15px;
+            border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
         }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-sub); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        @keyframes slideUpModal { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1 class="app-title">
+    <div class="app-brand">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
         PANDU-GI PRO
-    </h1>
-    <div class="app-subtitle">DATABASE & SOP GARDU INDUK</div>
+    </div>
+    <button id="btn-home" class="btn-back" onclick="goHome()">
+        ← Menu Utama
+    </button>
 </div>
 
 <div class="container">
-    
-    <div id="tab-alarm" class="tab-section active">
+
+    <div id="main-menu">
+        <div style="margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 22px;">Halo, Operator 👋</h2>
+            <p style="margin: 4px 0 0 0; color: var(--text-sub); font-size: 14px;">Pilih menu operasional hari ini.</p>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openSection('section-alarm')">
+                <div class="menu-icon-box ic-blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                </div>
+                <div class="menu-title">Cari Alarm</div>
+                <div class="menu-desc">Database Annunciator</div>
+            </div>
+            <div class="menu-card" onclick="openSection('section-sop')">
+                <div class="menu-icon-box ic-green">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </div>
+                <div class="menu-title">Dokumen SOP</div>
+                <div class="menu-desc">Manual Book PDF</div>
+            </div>
+            <div class="menu-card" onclick="openSection('section-contact')">
+                <div class="menu-icon-box ic-orange">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <div class="menu-title">Kontak</div>
+                <div class="menu-desc">Nomor Darurat</div>
+            </div>
+            <div class="menu-card" onclick="openSection('section-data')">
+                <div class="menu-icon-box ic-gray">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </div>
+                <div class="menu-title">Data</div>
+                <div class="menu-desc">Backup & Restore</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="section-alarm" class="app-section">
+        <div class="search-bar-wrapper">
+            <input type="text" id="search-input" class="search-bar" placeholder="Ketik unit atau nama alarm..." oninput="renderAlarms()">
+        </div>
         <button class="btn btn-primary btn-full" style="margin-bottom:15px;" onclick="openModal('modal-alarm')">+ Tambah Data Alarm</button>
-        <input type="text" id="search-input" class="search-bar" placeholder="Cari unit atau nama alarm..." oninput="renderAlarms()">
         <div id="alarm-list"></div>
     </div>
 
-    <div id="tab-sop" class="tab-section">
+    <div id="section-sop" class="app-section">
+        <h2 style="margin-top:0">Dokumen SOP</h2>
         <div class="card">
             <h3 class="card-title">Upload SOP (PDF)</h3>
-            <p class="card-desc" style="margin-bottom:15px">Simpan file PDF manual book di sini. Mendukung file besar (IndexedDB).</p>
+            <p class="card-desc" style="margin-bottom:15px">Simpan file PDF manual book di sini (Tersimpan Lokal).</p>
             <input type="text" id="sop-name" placeholder="Nama Dokumen (misal: Manual Trafo)">
             <input type="file" id="sop-file" accept="application/pdf">
             <button class="btn btn-primary btn-full" onclick="addSOP()">Simpan Dokumen</button>
         </div>
+        <h4 style="margin: 15px 0 10px 5px;">Daftar Dokumen</h4>
         <div id="sop-list"></div>
     </div>
 
-    <div id="tab-contact" class="tab-section">
-        <button class="btn btn-primary btn-full" style="margin-bottom:15px;" onclick="openModal('modal-contact')">+ Tambah Kontak Darurat</button>
+    <div id="section-contact" class="app-section">
+        <h2 style="margin-top:0">Kontak Darurat</h2>
+        <button class="btn btn-primary btn-full" style="margin-bottom:15px;" onclick="openModal('modal-contact')">+ Tambah Kontak</button>
         <div id="contact-list"></div>
     </div>
 
-    <div id="tab-data" class="tab-section">
+    <div id="section-data" class="app-section">
+        <h2 style="margin-top:0">Pengaturan Data</h2>
         <div class="card">
             <h3 class="card-title">Backup & Restore</h3>
-            <p class="card-desc" style="margin-bottom:15px">Pindahkan data antar perangkat. Proses backup mungkin memakan waktu jika ada banyak file PDF.</p>
-            
+            <p class="card-desc" style="margin-bottom:15px">Simpan database alarm & kontak ke file JSON.</p>
             <button class="btn btn-secondary btn-full" onclick="backupData()">📤 Download Backup (.json)</button>
-            
             <div style="margin: 20px 0; border-top: 1px solid #eee;"></div>
-            
-            <p class="card-desc">Restore dari file backup:</p>
+            <p class="card-desc">Restore dari file:</p>
             <input type="file" id="restore-file" accept=".json">
             <button class="btn btn-success btn-full" onclick="restoreData()">📥 Restore Data</button>
         </div>
@@ -286,34 +292,15 @@
 
 </div>
 
-<nav class="bottom-nav">
-    <button class="nav-item active" onclick="switchTab('alarm', this)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-        Alarm
-    </button>
-    <button class="nav-item" onclick="switchTab('sop', this)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-        SOP
-    </button>
-    <button class="nav-item" onclick="switchTab('contact', this)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        Kontak
-    </button>
-    <button class="nav-item" onclick="switchTab('data', this)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-        Data
-    </button>
-</nav>
-
 <div id="modal-alarm" class="overlay">
     <div class="modal">
-        <h3 style="margin-top:0">Edit Data Alarm</h3>
+        <h3 style="margin-top:0" id="modal-title-alarm">Tambah Data Alarm</h3>
         <input type="hidden" id="edit-idx">
         <input type="text" id="in-unit" placeholder="Unit (Contoh: TRAFO 1)">
         <input type="text" id="in-alarm" placeholder="Nama Alarm">
-        <textarea id="in-maksud" rows="3" placeholder="Maksud Indikasi"></textarea>
-        <textarea id="in-sebab" rows="3" placeholder="Penyebab"></textarea>
-        <textarea id="in-tindakan" rows="3" placeholder="Tindakan"></textarea>
+        <textarea id="in-maksud" rows="2" placeholder="Maksud Indikasi"></textarea>
+        <textarea id="in-sebab" rows="2" placeholder="Penyebab"></textarea>
+        <textarea id="in-tindakan" rows="2" placeholder="Tindakan"></textarea>
         <div style="display:flex; gap:10px; margin-top:10px">
             <button class="btn btn-primary btn-full" onclick="saveAlarm()">Simpan</button>
             <button class="btn btn-secondary btn-full" onclick="closeModal('modal-alarm')">Batal</button>
@@ -334,13 +321,10 @@
     </div>
 </div>
 
-<div id="loader">
-    <div class="spinner"></div>
-    <div id="loader-text">Memproses data...</div>
-</div>
+<div id="loader"><div class="spinner"></div><div id="loader-text">Memproses data...</div></div>
 
 <script>
-// --- 1. DATA MASTER ---
+// --- DATABASE LENGKAP ---
 const INITIAL_DB = [
     {s:"TRAFO 1", a:"CB Q0 – On Local", m:"Posisi PMT pada posisi Local", p:"Switch R/S pada posisi remote atau local", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
     {s:"TRAFO 1", a:"DS Q1/Q2 On Local", m:"Posisi PMS Rel Posisi Local", p:"Switch R/S pada posisi remote atau local", t:"Periksa ,catat ,reset dan laporkan sesuai prosedur"},
@@ -454,356 +438,209 @@ const INITIAL_DB = [
     {s:"CIKARANG 2", a:"F87L Operated", m:"PMT Trip karena Rele Differential Line bekerja", p:"Ada gangguan pada system 150 kV", t:"Periksa, catat, dan laporkan"}
 ];
 
-// --- 2. CONFIG & STATE ---
-let dbAlarm = JSON.parse(localStorage.getItem('PANDU_ALARM'));
-if(!dbAlarm || dbAlarm.length === 0) {
-    dbAlarm = INITIAL_DB;
-    localStorage.setItem('PANDU_ALARM', JSON.stringify(dbAlarm));
-}
-let dbKontak = JSON.parse(localStorage.getItem('PANDU_CONTACT')) || [];
-let dbSOP; // IndexedDB instance
+const INITIAL_CONTACTS = [
+    {nama: "Dispatcher UP2B", no: "021-12345678"},
+    {nama: "Pemadam Kebakaran", no: "113"},
+    {nama: "Polisi (Darurat)", no: "110"},
+    {nama: "Rumah Sakit Terdekat", no: "118"}
+];
 
-// --- 3. INDEXEDDB SETUP (SOP) ---
-function initDB() {
-    const request = indexedDB.open('PANDU_GI_DB', 1);
-    request.onupgradeneeded = (e) => {
-        const db = e.target.result;
-        if (!db.objectStoreNames.contains('sops')) {
-            db.createObjectStore('sops', { keyPath: 'id', autoIncrement: true });
-        }
-    };
-    request.onsuccess = (e) => {
-        dbSOP = e.target.result;
-        renderSOP();
-    };
-    request.onerror = (e) => console.error("Database error", e);
+// --- APP STATE ---
+let alarms = JSON.parse(localStorage.getItem('pandu_alarms')) || INITIAL_DB;
+let contacts = JSON.parse(localStorage.getItem('pandu_contacts')) || INITIAL_CONTACTS;
+let db;
+
+function openSection(id) {
+    document.getElementById('main-menu').style.display = 'none';
+    document.querySelectorAll('.app-section').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('btn-home').style.display = 'block';
+    if(id === 'section-alarm') document.getElementById('search-input').focus();
 }
 
-// --- 4. CORE FUNCTIONS ---
-
-// Tab Switching
-function switchTab(tabId, btn) {
-    document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    document.getElementById('tab-' + tabId).classList.add('active');
-    btn.classList.add('active');
+function goHome() {
+    document.getElementById('main-menu').style.display = 'block';
+    document.querySelectorAll('.app-section').forEach(el => el.classList.remove('active'));
+    document.getElementById('btn-home').style.display = 'none';
 }
 
-// Modal Logic
-function openModal(id) {
-    document.getElementById(id).style.display = 'flex';
-    // Reset forms
-    if(id === 'modal-alarm') {
-        document.getElementById('edit-idx').value = "";
-        document.querySelectorAll('#modal-alarm input, #modal-alarm textarea').forEach(e => e.value = "");
-    } else if (id === 'modal-contact') {
-        document.getElementById('contact-idx').value = "";
-        document.querySelectorAll('#modal-contact input').forEach(e => e.value = "");
-    }
+// --- INDEXED DB ---
+const request = indexedDB.open("PanduGIDB", 1);
+request.onupgradeneeded = function(e) {
+    db = e.target.result;
+    if (!db.objectStoreNames.contains('sops')) db.createObjectStore('sops', { keyPath: 'id', autoIncrement: true });
+};
+request.onsuccess = function(e) { db = e.target.result; renderSOPs(); };
+
+function showLoader(show, text="Memproses...") {
+    const l = document.getElementById('loader');
+    document.getElementById('loader-text').innerText = text;
+    l.style.display = show ? 'flex' : 'none';
 }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-function showLoader(msg) {
-    document.getElementById('loader').style.display = 'flex';
-    document.getElementById('loader-text').innerText = msg;
-}
-function hideLoader() { document.getElementById('loader').style.display = 'none'; }
 
 // --- ALARM LOGIC ---
 function renderAlarms() {
     const list = document.getElementById('alarm-list');
-    const q = document.getElementById('search-input').value.toLowerCase();
+    const keyword = document.getElementById('search-input').value.toLowerCase();
     list.innerHTML = "";
+    const filtered = alarms.filter(item => item.s.toLowerCase().includes(keyword) || item.a.toLowerCase().includes(keyword));
 
-    dbAlarm.forEach((item, idx) => {
-        const text = (item.s + " " + item.a).toLowerCase();
-        if(text.includes(q)) {
-            const isTrip = item.a.toLowerCase().includes('trip');
-            const card = document.createElement('div');
-            card.className = `card ${isTrip ? 'trip-alarm' : ''}`;
-            card.innerHTML = `
-                <span class="badge">${item.s}</span>
-                <h3 class="card-title">${item.a}</h3>
-                <p class="card-desc"><b>Indikasi:</b> ${item.m}</p>
-                <p class="card-desc" style="margin-top:5px"><b>Tindakan:</b> ${item.t}</p>
-                <div class="action-row">
-                    <button class="btn btn-secondary" style="flex:1" onclick="editAlarm(${idx})">Edit</button>
-                    <button class="btn btn-danger" style="flex:1" onclick="deleteAlarm(${idx})">Hapus</button>
-                </div>
-            `;
-            list.appendChild(card);
-        }
+    if (filtered.length === 0) {
+        list.innerHTML = '<div class="empty-state">Data tidak ditemukan. <br>Klik "+ Tambah Data" untuk membuat baru.</div>';
+        return;
+    }
+
+    filtered.forEach((item, index) => {
+        const realIndex = alarms.indexOf(item);
+        const isTrip = item.a.toLowerCase().includes('trip') || item.a.toLowerCase().includes('lockout');
+        const borderClass = isTrip ? 'trip-alarm' : '';
+        const html = `
+            <div class="card ${borderClass}">
+                <button class="delete-btn" onclick="deleteAlarm(${realIndex})">✕</button>
+                <div class="badge">${item.s}</div>
+                <h3 class="card-title" onclick="editAlarm(${realIndex})">${item.a}</h3>
+                <span class="card-label">Indikasi:</span><p class="card-desc">${item.m}</p>
+                <span class="card-label">Penyebab:</span><p class="card-desc">${item.p}</p>
+                <span class="card-label">Tindakan:</span><p class="card-desc">${item.t}</p>
+            </div>`;
+        list.innerHTML += html;
     });
 }
-
+function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+    if(id === 'modal-alarm') {
+        document.getElementById('modal-title-alarm').innerText = "Tambah Data Alarm";
+        ['edit-idx','in-unit','in-alarm','in-maksud','in-sebab','in-tindakan'].forEach(i => document.getElementById(i).value = "");
+    }
+}
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 function saveAlarm() {
     const idx = document.getElementById('edit-idx').value;
-    const newData = {
+    const item = {
         s: document.getElementById('in-unit').value,
         a: document.getElementById('in-alarm').value,
         m: document.getElementById('in-maksud').value,
         p: document.getElementById('in-sebab').value,
         t: document.getElementById('in-tindakan').value
     };
-    
-    if(!newData.s || !newData.a) return alert("Unit dan Nama Alarm wajib diisi");
-
-    if(idx === "") dbAlarm.unshift(newData);
-    else dbAlarm[idx] = newData;
-
-    localStorage.setItem('PANDU_ALARM', JSON.stringify(dbAlarm));
-    closeModal('modal-alarm');
-    renderAlarms();
+    if(!item.s || !item.a) { alert("Unit dan Nama Alarm wajib diisi"); return; }
+    if(idx === "") alarms.unshift(item); else alarms[idx] = item;
+    localStorage.setItem('pandu_alarms', JSON.stringify(alarms));
+    closeModal('modal-alarm'); renderAlarms();
 }
-
-function editAlarm(idx) {
-    const d = dbAlarm[idx];
-    document.getElementById('edit-idx').value = idx;
-    document.getElementById('in-unit').value = d.s;
-    document.getElementById('in-alarm').value = d.a;
-    document.getElementById('in-maksud').value = d.m;
-    document.getElementById('in-sebab').value = d.p;
-    document.getElementById('in-tindakan').value = d.t;
+function editAlarm(i) {
+    const item = alarms[i];
+    document.getElementById('edit-idx').value = i;
+    document.getElementById('in-unit').value = item.s;
+    document.getElementById('in-alarm').value = item.a;
+    document.getElementById('in-maksud').value = item.m;
+    document.getElementById('in-sebab').value = item.p;
+    document.getElementById('in-tindakan').value = item.t;
+    document.getElementById('modal-title-alarm').innerText = "Edit Data Alarm";
     openModal('modal-alarm');
 }
-
-function deleteAlarm(idx) {
-    if(confirm("Hapus data alarm ini?")) {
-        dbAlarm.splice(idx, 1);
-        localStorage.setItem('PANDU_ALARM', JSON.stringify(dbAlarm));
+function deleteAlarm(i) {
+    if(confirm("Hapus alarm ini?")) {
+        alarms.splice(i, 1);
+        localStorage.setItem('pandu_alarms', JSON.stringify(alarms));
         renderAlarms();
     }
 }
 
-// --- SOP LOGIC (INDEXEDDB) ---
+// --- SOP LOGIC ---
 function addSOP() {
-    const name = document.getElementById('sop-name').value;
-    const file = document.getElementById('sop-file').files[0];
-
-    if(!name || !file) return alert("Isi nama dan pilih file PDF!");
-    if(file.type !== "application/pdf") return alert("Hanya file PDF yang diperbolehkan.");
-
-    showLoader("Menyimpan ke Database...");
-
-    const transaction = dbSOP.transaction(['sops'], 'readwrite');
-    const store = transaction.objectStore('sops');
-    
-    const data = {
-        name: name,
-        file: file,
-        size: (file.size / (1024*1024)).toFixed(2), // MB
-        created: new Date()
+    const f = document.getElementById('sop-file');
+    const n = document.getElementById('sop-name');
+    if (f.files.length === 0 || !n.value) { alert("Isi nama dan pilih file."); return; }
+    showLoader(true, "Menyimpan...");
+    const r = new FileReader();
+    r.onload = function(e) {
+        const b = new Blob([e.target.result], { type: 'application/pdf' });
+        const tx = db.transaction(['sops'], 'readwrite');
+        tx.objectStore('sops').add({ name: n.value, blob: b, date: new Date().toLocaleDateString() });
+        tx.oncomplete = function() { showLoader(false); n.value=""; f.value=""; renderSOPs(); alert("SOP tersimpan!"); };
+        tx.onerror = function() { showLoader(false); alert("Gagal simpan (File terlalu besar?)"); };
     };
-
-    store.add(data).onsuccess = () => {
-        hideLoader();
-        document.getElementById('sop-name').value = "";
-        document.getElementById('sop-file').value = "";
-        renderSOP();
-    };
-    store.onerror = () => { hideLoader(); alert("Gagal menyimpan file (Quota Exceeded?)"); };
+    r.readAsArrayBuffer(f.files[0]);
 }
-
-function renderSOP() {
-    const list = document.getElementById('sop-list');
-    list.innerHTML = "";
-    
-    const transaction = dbSOP.transaction(['sops'], 'readonly');
-    const store = transaction.objectStore('sops');
-
-    store.openCursor().onsuccess = (e) => {
-        const cursor = e.target.result;
-        if(cursor) {
-            const { id, name, size } = cursor.value;
-            list.innerHTML += `
-                <div class="card">
-                    <div style="display:flex; justify-content:space-between; align-items:start">
-                        <div>
-                            <div class="card-title">${name}</div>
-                            <div class="card-desc">Ukuran: ${size} MB</div>
-                        </div>
-                    </div>
-                    <div class="action-row">
-                        <button class="btn btn-primary" style="flex:1" onclick="openPDF(${id})">📄 Buka PDF</button>
-                        <button class="btn btn-danger" style="flex:0 0 auto" onclick="deleteSOP(${id})">🗑️</button>
-                    </div>
-                </div>
-            `;
-            cursor.continue();
-        }
+function renderSOPs() {
+    const l = document.getElementById('sop-list');
+    l.innerHTML = "<div class='spinner' style='width:20px;height:20px;border-width:2px;border-top-color:var(--primary)'></div>";
+    const req = db.transaction(['sops'], 'readonly').objectStore('sops').getAll();
+    req.onsuccess = function(e) {
+        const fs = e.target.result;
+        l.innerHTML = fs.length ? "" : "<p class='card-desc'>Belum ada dokumen.</p>";
+        fs.forEach(f => {
+            const u = URL.createObjectURL(f.blob);
+            l.innerHTML += `<div class="card" style="display:flex;justify-content:space-between;align-items:center;"><div><h4 class="card-title" style="margin-bottom:4px">${f.name}</h4><span class="card-desc">${f.date}</span></div><div style="display:flex;gap:8px"><a href="${u}" target="_blank" class="btn btn-primary" style="padding:8px 12px">Buka</a><button class="btn btn-danger" style="padding:8px" onclick="deleteSOP(${f.id})">🗑️</button></div></div>`;
+        });
     };
 }
-
-function openPDF(id) {
-    const transaction = dbSOP.transaction(['sops'], 'readonly');
-    const store = transaction.objectStore('sops');
-    store.get(id).onsuccess = (e) => {
-        const file = e.target.result.file;
-        const url = URL.createObjectURL(file);
-        window.open(url, '_blank');
-    };
-}
-
 function deleteSOP(id) {
-    if(confirm("Hapus dokumen ini?")) {
-        const transaction = dbSOP.transaction(['sops'], 'readwrite');
-        transaction.objectStore('sops').delete(id).onsuccess = () => renderSOP();
+    if(confirm("Hapus SOP?")) {
+        const tx = db.transaction(['sops'], 'readwrite');
+        tx.objectStore('sops').delete(id);
+        tx.oncomplete = () => renderSOPs();
     }
 }
 
-// --- CONTACT LOGIC ---
-function renderContact() {
-    const list = document.getElementById('contact-list');
-    list.innerHTML = "";
-    dbKontak.forEach((c, idx) => {
-        list.innerHTML += `
-            <div class="card" style="display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <div class="card-title" style="margin-bottom:4px">${c.nama}</div>
-                    <div style="color:var(--primary); font-weight:600">${c.nomor}</div>
-                </div>
-                <button class="btn btn-danger" onclick="deleteContact(${idx})">🗑️</button>
-            </div>
-        `;
+// --- CONTACTS ---
+function renderContacts() {
+    const l = document.getElementById('contact-list'); l.innerHTML = "";
+    contacts.forEach((c, i) => {
+        l.innerHTML += `<div class="card" style="display:flex;justify-content:space-between;align-items:center;"><div><h4 class="card-title" style="margin-bottom:4px">${c.nama}</h4><a href="tel:${c.no}" class="card-desc" style="color:var(--primary);font-weight:700;text-decoration:none">${c.no}</a></div><button class="btn btn-danger" style="padding:8px" onclick="deleteContact(${i})">🗑️</button></div>`;
     });
 }
-
 function saveContact() {
-    const nama = document.getElementById('in-nama').value;
-    const nomor = document.getElementById('in-nomor').value;
-    if(!nama || !nomor) return alert("Isi nama dan nomor.");
-    
-    dbKontak.push({nama, nomor});
-    localStorage.setItem('PANDU_CONTACT', JSON.stringify(dbKontak));
-    closeModal('modal-contact');
-    renderContact();
+    const n = document.getElementById('in-nama').value;
+    const no = document.getElementById('in-nomor').value;
+    if(!n || !no) return;
+    contacts.push({nama:n, no:no});
+    localStorage.setItem('pandu_contacts', JSON.stringify(contacts));
+    closeModal('modal-contact'); renderContacts();
+    document.getElementById('in-nama').value=""; document.getElementById('in-nomor').value="";
 }
-
-function deleteContact(idx) {
+function deleteContact(i) {
     if(confirm("Hapus kontak?")) {
-        dbKontak.splice(idx, 1);
-        localStorage.setItem('PANDU_CONTACT', JSON.stringify(dbKontak));
-        renderContact();
+        contacts.splice(i, 1);
+        localStorage.setItem('pandu_contacts', JSON.stringify(contacts));
+        renderContacts();
     }
 }
 
-// --- BACKUP & RESTORE SYSTEM ---
-async function backupData() {
-    showLoader("Mengemas data backup...");
-    
-    try {
-        // 1. Get SOPs and convert to Base64
-        const sops = [];
-        const transaction = dbSOP.transaction(['sops'], 'readonly');
-        const store = transaction.objectStore('sops');
-        
-        // Helper: Convert Blob to Base64
-        const blobToBase64 = blob => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.readAsDataURL(blob);
-        });
-
-        // Get all SOPs
-        const getAllReq = store.getAll();
-        
-        getAllReq.onsuccess = async (e) => {
-            const files = e.target.result;
-            for(const f of files) {
-                const b64 = await blobToBase64(f.file);
-                sops.push({ name: f.name, size: f.size, data: b64 });
-            }
-
-            // 2. Combine all data
-            const fullBackup = {
-                date: new Date().toISOString(),
-                alarms: dbAlarm,
-                contacts: dbKontak,
-                sops: sops
-            };
-
-            // 3. Create Download
-            const blob = new Blob([JSON.stringify(fullBackup)], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `PANDU_GI_BACKUP_${new Date().toISOString().slice(0,10)}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            hideLoader();
-        };
-    } catch(err) {
-        hideLoader();
-        alert("Gagal backup: " + err.message);
-    }
+// --- BACKUP RESTORE ---
+function backupData() {
+    const d = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ alarms: alarms, contacts: contacts }));
+    const a = document.createElement('a');
+    a.href = d; a.download = "backup_pandugi_" + new Date().toISOString().slice(0,10) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
 }
-
-async function restoreData() {
-    const fileInput = document.getElementById('restore-file');
-    const file = fileInput.files[0];
-    if(!file) return alert("Pilih file backup .json dulu.");
-
-    showLoader("Membaca data restore...");
-
-    const reader = new FileReader();
-    reader.onload = async (e) => {
+function restoreData() {
+    const f = document.getElementById('restore-file');
+    if(!f.files.length) return;
+    const r = new FileReader();
+    r.onload = function(e) {
         try {
-            const data = JSON.parse(e.target.result);
-            
-            // Restore LS
-            if(data.alarms) {
-                dbAlarm = data.alarms;
-                localStorage.setItem('PANDU_ALARM', JSON.stringify(dbAlarm));
+            const d = JSON.parse(e.target.result);
+            if(d.alarms && d.contacts && confirm("Timpa data lama?")) {
+                alarms = d.alarms; contacts = d.contacts;
+                localStorage.setItem('pandu_alarms', JSON.stringify(alarms));
+                localStorage.setItem('pandu_contacts', JSON.stringify(contacts));
+                alert("Data pulih!"); renderAlarms(); renderContacts();
             }
-            if(data.contacts) {
-                dbKontak = data.contacts;
-                localStorage.setItem('PANDU_CONTACT', JSON.stringify(dbKontak));
-            }
-
-            // Restore IndexedDB
-            if(data.sops && data.sops.length > 0) {
-                const transaction = dbSOP.transaction(['sops'], 'readwrite');
-                const store = transaction.objectStore('sops');
-                store.clear(); // Clear old SOPs
-
-                for(const s of data.sops) {
-                    const res = await fetch(s.data);
-                    const blob = await res.blob();
-                    store.add({
-                        name: s.name,
-                        file: blob,
-                        size: s.size,
-                        created: new Date()
-                    });
-                }
-            }
-
-            hideLoader();
-            alert("Restore Berhasil! Halaman akan dimuat ulang.");
-            location.reload();
-        } catch(err) {
-            hideLoader();
-            alert("File corrupt atau terlalu besar: " + err.message);
-        }
+        } catch(err) { alert("File error."); }
     };
-    reader.readAsText(file);
+    r.readAsText(f.files[0]);
 }
-
 function clearAllData() {
-    if(confirm("PERINGATAN: Semua data akan dihapus permanen! Lanjutkan?")) {
+    if(confirm("Hapus SEMUA data?")) {
         localStorage.clear();
-        const req = indexedDB.deleteDatabase('PANDU_GI_DB');
-        req.onsuccess = () => location.reload();
+        const req = indexedDB.deleteDatabase("PanduGIDB");
+        req.onsuccess = function() { location.reload(); };
     }
 }
 
-// --- INIT ---
-window.onload = () => {
-    initDB();
-    renderAlarms();
-    renderContact();
-};
-
+renderAlarms(); renderContacts();
 </script>
 </body>
 </html>
